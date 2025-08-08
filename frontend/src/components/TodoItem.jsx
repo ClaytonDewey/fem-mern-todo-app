@@ -3,7 +3,7 @@ import { IconCross } from '../icons';
 
 export const TodoItem = (props) => {
   const { todo } = props;
-  console.log(todo);
+
   return (
     <div className='todo'>
       <Button

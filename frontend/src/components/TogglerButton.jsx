@@ -1,13 +1,11 @@
 import { Button } from '.';
 import { IconSun, IconMoon } from '../icons';
 
-export const TogglerButton = () => {
-  const theme = 'light';
-
+export const TogglerButton = ({ themeToggler }) => {
   return (
     <div className='theme__container'>
-      <Button>
-        {theme !== 'light' ? (
+      <Button onClick={themeToggler}>
+        {window.localStorage.getItem('color-theme') !== 'light' ? (
           <>
             <IconSun />
             <span className='sr-only'>Set light mode</span>
