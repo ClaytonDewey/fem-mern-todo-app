@@ -26,12 +26,12 @@ const globalStyle = createGlobalStyle`
     background-color: ${({ theme }) => theme.background};
     background-image: 
       url(${({ theme }) => theme.backgroundImageSm});
-    font-size: 1.8rem;
+    font-size: 18px;
     color: ${({ theme }) => theme.text};
   }
 
   h1 {
-    font-size: 3.375rem;
+    font-size: 33.75px;
     color: ${({ theme }) => theme.text};
   }
 
