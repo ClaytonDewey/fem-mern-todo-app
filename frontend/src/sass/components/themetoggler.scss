@@ -1,0 +1,11 @@
+.theme {
+  &__container {
+    display: flex;
+
+    button {
+      cursor: pointer;
+      background: transparent;
+      border: none;
+    }
+  }
+}

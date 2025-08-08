@@ -1,0 +1,11 @@
+@use '../util' as *;
+
+.todo__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: rem(32);
+
+  h1 {
+    color: var(--light-1);
+  }
+}

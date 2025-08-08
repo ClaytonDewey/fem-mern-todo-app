@@ -1,0 +1,9 @@
+@use '../util' as *;
+
+.footer {
+  &__main {
+    text-align: center;
+    margin-top: rem(40);
+    font-size: rem(14);
+  }
+}

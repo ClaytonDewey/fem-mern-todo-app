@@ -1,0 +1,25 @@
+@use '../util' as *;
+
+.btn {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+
+  &-text {
+    font-weight: 700;
+    color: var(--light-4);
+    transition: color var(--transition);
+
+    &.active {
+      color: var(--primary-color);
+    }
+
+    &:hover {
+      color: var(--light-2);
+    }
+  }
+
+  &-del {
+    margin-right: rem(20);
+  }
+}
