@@ -31,7 +31,8 @@ const globalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.text};
   }
 
-  .todo {
+  .todo,
+  .form__wrapper {
     background-color: ${({ theme }) => theme.inputBg};
     color: ${({ theme }) => theme.text}
   }
