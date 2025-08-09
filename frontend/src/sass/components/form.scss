@@ -11,6 +11,10 @@
       text-align: center;
       margin-bottom: rem(10);
     }
+
+    p {
+      margin-bottom: rem(20);
+    }
   }
 
   &__group {
@@ -153,4 +157,39 @@
       }
     }
   }
+}
+
+.input {
+  &__group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: rem(30);
+
+    &-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: rem(55);
+      height: rem(80);
+      font-family: var(--ff-sans);
+      font-size: rem(30);
+      border: none;
+      background-color: transparent;
+      border: 1px solid;
+      border-radius: var(--radius);
+    }
+  }
+}
+
+/* For Chrome, Safari, Edge, and Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
 }
