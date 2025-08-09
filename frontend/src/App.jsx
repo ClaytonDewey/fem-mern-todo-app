@@ -4,7 +4,16 @@ import ThemeContext from './context/ThemeContext';
 import { lightTheme, darkTheme } from './theme/themes';
 import useThemeMode from './hooks/useThemeMode';
 import { Toaster } from 'react-hot-toast';
-import { AddTodo, Footer, Header, TogglerButton, TodoList } from './components';
+import { Header, TogglerButton } from './components';
+import { Routes, Route } from 'react-router-dom';
+import {
+  HomePage,
+  LoginPage,
+  EmailVerificationPage,
+  ForgotPasswordPage,
+  ResetPasswordPage,
+  SignUpPage,
+} from './pages/';
 import './sass/style.scss';
 
 const App = () => {
@@ -20,9 +29,14 @@ const App = () => {
           <Header>
             <TogglerButton themeToggler={themeToggler} />
           </Header>
-          <AddTodo />
-          <TodoList />
-          <Footer />
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/login' element={<LoginPage />} />
+            <Route path='/verify-email' element={<EmailVerificationPage />} />
+            <Route path='/forgot-password' element={<ForgotPasswordPage />} />
+            <Route path='/reset-password' element={<ResetPasswordPage />} />
+            <Route path='/signup' element={<SignUpPage />} />
+          </Routes>
         </div>
       </ThemeProvider>
     </ThemeContext>
