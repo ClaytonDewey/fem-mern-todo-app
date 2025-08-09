@@ -37,6 +37,11 @@ const globalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.text}
   }
 
+  .form__footer-link,
+  .form__message-link {
+    color: ${({ theme }) => theme.linkText}
+  }
+
   input {
     color: ${({ theme }) => theme.text}
   }
@@ -47,6 +52,7 @@ const globalStyle = createGlobalStyle`
         url(${({ theme }) => theme.backgroundImage});
     }
   }
+
 `;
 
 export default withTheme(globalStyle);

@@ -10,6 +10,7 @@ export const darkTheme = {
   background: 'var(--dark-5)',
   inputBg: 'var(--dark-4)',
   text: 'var(--light-1)',
+  linkText: 'var(--light-4)',
 };
 
 export const lightTheme = {
@@ -18,4 +19,5 @@ export const lightTheme = {
   background: 'var(--light-1)',
   inputBg: 'var(--light-2)',
   text: 'var(--dark-6)',
+  linkText: 'var(--dark-4)',
 };
