@@ -4,7 +4,7 @@ export const TodoList = () => {
   return (
     <div className='todo__list'>
       <TodoItem
-        todo={{ text: 'Feed the cat', status: 'done', id: 1 }}
+        todo={{ text: 'Feed the cat', status: 'completed', id: 1 }}
         key={1}
       />
       <TodoItem
@@ -16,7 +16,7 @@ export const TodoList = () => {
         key={3}
       />
       <TodoItem
-        todo={{ text: 'Clean the kitchen', status: 'done', id: 4 }}
+        todo={{ text: 'Clean the kitchen', status: 'completed', id: 4 }}
         key={4}
       />
 
