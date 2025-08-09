@@ -6,6 +6,9 @@
   margin-bottom: rem(32);
 
   h1 {
-    color: var(--light-1);
+    a {
+      color: var(--light-1);
+      text-decoration: none;
+    }
   }
 }
