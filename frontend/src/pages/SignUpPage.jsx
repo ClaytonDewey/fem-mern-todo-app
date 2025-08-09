@@ -14,7 +14,7 @@ export const SignUpPage = () => {
 
   return (
     <div className='form__wrapper'>
-      <h2 className='text-center'>Create an Account</h2>
+      <h2>Create an Account</h2>
       <form onSubmit={handleSubmit}>
         <div className='form__group'>
           <label htmlFor='name' className='sr-only'>
@@ -87,7 +87,7 @@ export const SignUpPage = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
-
+        {/* TODO: Show success indicator if password/confirmpassword match */}
         <Button onSubmit={handleSubmit} type='submit' className='form__btn'>
           Create Account
         </Button>

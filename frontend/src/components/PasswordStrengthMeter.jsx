@@ -10,21 +10,17 @@ const PasswordCriteria = ({ password }) => {
   ];
 
   return (
-    <div className='mt-2'>
+    <div className='passwordmeter'>
       {criteria.map((item) => (
-        <div
-          key={item.label}
-          className='password__criteria flex items-center text-xs'>
+        <div key={item.label} className='passwordmeter__criteria'>
           {item.met ? (
-            <Check className='password__check size-4 text-green-500 mr-2' />
+            <Check className='passwordmeter__pass icon' />
           ) : (
-            <X className='password__fail size-4 text-gray-500 mr-2' />
+            <X className='passwordmeter__fail icon' />
           )}
           <span
             className={
-              item.met
-                ? 'password__check text-green-500'
-                : 'password__fail text-gray-400'
+              item.met ? 'passwordmeter__pass' : 'passwordmeter__fail'
             }>
             {item.label}
           </span>
@@ -62,18 +58,16 @@ export const PasswordStrengthMeter = ({ password }) => {
   };
 
   return (
-    <div className='mt-2 mb-4'>
-      <div className='flex justify-between items-center mb-1'>
-        <span className='text-xs text-gray-400'>Password Strength</span>
-        <span className='text-xs text-gray-400'>
-          {getStrengthText(strength)}
-        </span>
+    <div className='passwordmeter__wrapper'>
+      <div className='passwordmeter__strength'>
+        <span>Password Strength</span>
+        <span> {getStrengthText(strength)}</span>
       </div>
-      <div className='flex space-x-1'>
+      <div className='passwordmeter__strength'>
         {[...Array(4)].map((_, index) => (
           <div
             key={index}
-            className={`h-1 w-1/4 rounded-full transition-colors duration-300 
+            className={`passwordmeter__strength-bar 
                 ${index < strength ? getColor(strength) : 'bg-gray-600'}
               `}
           />
