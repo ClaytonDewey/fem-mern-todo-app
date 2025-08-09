@@ -58,13 +58,99 @@
     border-radius: var(--radius);
     cursor: pointer;
     margin-bottom: rem(20);
+    opacity: 0.75;
+    transition: var(--transition);
+
+    &:hover {
+      opacity: 1;
+    }
   }
 
   &__footer {
-    text-align: center;
+    font-size: rem(14);
+    line-height: rem(20);
+
+    &-icon {
+      height: rem(16);
+      width: rem(16);
+      margin-right: rem(8);
+      vertical-align: middle;
+    }
+
+    &-link {
+      position: relative;
+      display: inline-flex;
+      justify-content: center;
+      text-decoration: none;
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        border-bottom: rem(1) solid;
+        width: 0;
+        transition: var(--transition);
+      }
+
+      &::before {
+        right: 50%;
+      }
+
+      &::after {
+        left: 50%;
+      }
+
+      &:hover {
+        &::before {
+          width: 50%;
+        }
+
+        &::after {
+          width: 50%;
+        }
+      }
+    }
   }
 
   &__message {
     margin-bottom: rem(20);
+
+    &-link {
+      position: relative;
+      display: inline-flex;
+      justify-content: center;
+      font-size: rem(14);
+      line-height: rem(20);
+      text-decoration: none;
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        border-bottom: rem(1) solid;
+        width: 0;
+        transition: var(--transition);
+      }
+
+      &::before {
+        right: 50%;
+      }
+
+      &::after {
+        left: 50%;
+      }
+
+      &:hover {
+        &::before {
+          width: 50%;
+        }
+
+        &::after {
+          width: 50%;
+        }
+      }
+    }
   }
 }
