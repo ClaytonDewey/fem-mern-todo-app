@@ -52,7 +52,7 @@ export const LoginPage = () => {
 
         <div className='form__message'>
           <p>
-            <Link to='/forgot-password' className='btn btn-text'>
+            <Link to='/forgot-password' className='form__message-link'>
               Forgot password?
             </Link>
           </p>
@@ -61,6 +61,12 @@ export const LoginPage = () => {
           Sign In
         </Button>
       </form>
+      <div className='form__footer text-center'>
+        Don't have an account?{' '}
+        <Link to={'/signup'} className='form__footer-link'>
+          Sign up
+        </Link>
+      </div>
     </div>
   );
 };
