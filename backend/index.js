@@ -1,22 +1,23 @@
+import 'dotenv/config';
 import express from 'express';
-import dotenv from 'dotenv';
 import cors from 'cors';
+import connectDB from './db/connectDB.js';
+import { APP_ORIGIN, PORT } from './constants/env.js';
 import cookieParser from 'cookie-parser';
-
-import { connectDB } from './db/connectDB.js';
-
-dotenv.config();
 
 const app = express();
 
-const PORT = process.env.PORT || 5050;
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(
+  cors({
+    origin: APP_ORIGIN,
+    credentials: true,
+  })
+);
+app.use(cookieParser());
 
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
-
-app.use(express.json()); // allows us to parse incoming requests:req.body
-app.use(cookieParser()); // allows us to parse incoming cookies
-
-app.listen(PORT, () => {
-  connectDB();
+app.listen(PORT, async () => {
   console.log(`App running on ${PORT}`);
+  await connectDB();
 });
