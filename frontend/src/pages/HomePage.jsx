@@ -1,3 +1,11 @@
+import { AddTodo, Footer, TodoList } from '../components';
+
 export const HomePage = () => {
-  return <div>HomePage</div>;
+  return (
+    <>
+      <AddTodo />
+      <TodoList />
+      <Footer />
+    </>
+  );
 };
