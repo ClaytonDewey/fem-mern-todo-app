@@ -1,6 +1,8 @@
 @use '../util' as *;
 
 :root {
+  --icon-check: url('/images/icon-check.svg');
+
   // Light colors
   --light-5: hsl(235, 19%, 35%);
   --light-4: hsl(236, 9%, 61%);

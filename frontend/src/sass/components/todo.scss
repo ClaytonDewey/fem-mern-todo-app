@@ -48,15 +48,9 @@
       height: 20px;
       width: 20px;
       transition: transform 120ms ease-in-out;
-      // background: var(--icon-check) no-repeat 50% center,
-      //   linear-gradient(-225deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%))
-      //     no-repeat;
-      background: linear-gradient(
-          -225deg,
-          hsl(192, 100%, 67%),
-          hsl(280, 87%, 65%)
-        )
-        no-repeat;
+      background: var(--icon-check) no-repeat 50% center,
+        linear-gradient(-225deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%))
+          no-repeat;
       border-radius: 100%;
     }
   }

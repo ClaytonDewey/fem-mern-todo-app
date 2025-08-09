@@ -1,10 +1,6 @@
 import { createGlobalStyle, withTheme } from 'styled-components';
-import check from '../images/icon-check.svg';
 
 const globalStyle = createGlobalStyle`
-  :root {
-    --icon-check: url(${check});
-  }
 
   * {
     margin: 0;

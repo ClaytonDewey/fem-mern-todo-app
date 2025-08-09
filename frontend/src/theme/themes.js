@@ -1,8 +1,8 @@
-import darkImg from '../images/bg-desktop-dark.jpg';
-import lightImg from '../images/bg-desktop-light.jpg';
+import darkImg from '/images/bg-desktop-dark.jpg';
+import lightImg from '/images/bg-desktop-light.jpg';
 
-import darkImgSm from '../images/bg-mobile-dark.jpg';
-import lightImgSm from '../images/bg-mobile-light.jpg';
+import darkImgSm from '/images/bg-mobile-dark.jpg';
+import lightImgSm from '/images/bg-mobile-light.jpg';
 
 export const darkTheme = {
   backgroundImageSm: darkImgSm,
