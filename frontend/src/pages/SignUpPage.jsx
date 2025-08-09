@@ -95,7 +95,7 @@ export const SignUpPage = () => {
         <footer className='form__footer'>
           <p>
             Already have an account?{' '}
-            <Link to='/login' className='btn btn-text'>
+            <Link to='/login' className='form__footer-link'>
               Sign in
             </Link>
           </p>
