@@ -1,4 +1,5 @@
 export { AddTodo } from './AddTodo';
+export { AppContainer } from './AppContainer';
 export { Button } from './Button';
 export { Footer } from './Footer';
 export { Header } from './Header';

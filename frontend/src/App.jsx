@@ -4,8 +4,8 @@ import ThemeContext from './context/ThemeContext';
 import { lightTheme, darkTheme } from './theme/themes';
 import useThemeMode from './hooks/useThemeMode';
 import { Toaster } from 'react-hot-toast';
-import { Header, TogglerButton } from './components';
-import { Routes, Route } from 'react-router-dom';
+import { AppContainer, Header, TogglerButton } from './components';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import {
   HomePage,
   LoginPage,
@@ -15,10 +15,13 @@ import {
   SignUpPage,
 } from './pages/';
 import './sass/style.scss';
+import { setNavigate } from './lib/navigation';
 
 const App = () => {
   const { theme, themeToggler } = useThemeMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
+  const navigate = useNavigate();
+  setNavigate(navigate);
 
   return (
     <ThemeContext>
@@ -30,7 +33,9 @@ const App = () => {
             <TogglerButton themeToggler={themeToggler} />
           </Header>
           <Routes>
-            <Route path='/' element={<HomePage />} />
+            <Route path='/' element={<AppContainer />}>
+              <Route index element={<HomePage />} />
+            </Route>
             <Route path='/login' element={<LoginPage />} />
             <Route
               path='/verify-email/:code'
