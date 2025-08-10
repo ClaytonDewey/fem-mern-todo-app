@@ -28,7 +28,7 @@ export const SignUpPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createAccount({ userName, email, password, confirmPassword });
+    createAccount({ name: userName, email, password, confirmPassword });
   };
 
   return (
