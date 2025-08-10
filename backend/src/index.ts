@@ -7,6 +7,7 @@ import { APP_ORIGIN, NODE_ENV, PORT } from './constants/env';
 import authRoutes from './routes/auth.route';
 import { authenticate } from './middleware/authenticate';
 import sessionRoutes from './routes/session.route';
+import userRoutes from './routes/user.route';
 
 const app = express();
 
@@ -31,7 +32,7 @@ app.get('/', (_, res) => {
 app.use('/auth', authRoutes);
 
 // protected routes
-// app.use('/user', authenticate, userRoutes)
+app.use('/user', authenticate, userRoutes);
 app.use('/sessions', authenticate, sessionRoutes);
 
 app.listen(PORT, async () => {
