@@ -38,7 +38,8 @@ const globalStyle = createGlobalStyle`
   }
 
   .form__footer-link,
-  .form__message-link {
+  .form__message-link,
+  .error-message-link {
     color: ${({ theme }) => theme.linkText}
   }
 
