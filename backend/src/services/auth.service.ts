@@ -217,7 +217,7 @@ export const sendPasswordResetEmail = async (email: string) => {
 
     const expiresAt = oneHourFromNow();
     const verificationCode = await VerificationCodeModel.create({
-      usreId: user._id,
+      userId: user._id,
       type: VerificationCodeType.PasswordReset,
       expiresAt,
     });
