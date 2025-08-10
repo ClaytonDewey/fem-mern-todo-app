@@ -48,7 +48,7 @@ export const createAccount = async (data: CreateAccountParams) => {
   const { email } = data;
   const emailDomain = email.split('@');
   appAssert(
-    emailDomain[1] !== APPROVED_DOMAIN,
+    emailDomain[1] === APPROVED_DOMAIN,
     UNAUTHORIZED,
     'Email address not allowed'
   );
