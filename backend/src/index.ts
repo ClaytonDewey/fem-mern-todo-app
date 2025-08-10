@@ -5,6 +5,8 @@ import cookieParser from 'cookie-parser';
 import connectToDatabase from './config/db';
 import { APP_ORIGIN, NODE_ENV, PORT } from './constants/env';
 import authRoutes from './routes/auth.route';
+import { authenticate } from './middleware/authenticate';
+import sessionRoutes from './routes/session.route';
 
 const app = express();
 
@@ -27,6 +29,10 @@ app.get('/', (_, res) => {
 
 // auth routes
 app.use('/auth', authRoutes);
+
+// protected routes
+// app.use('/user', authenticate, userRoutes)
+app.use('/sessions', authenticate, sessionRoutes);
 
 app.listen(PORT, async () => {
   console.log(`Server listening on port ${PORT} in ${NODE_ENV} environment`);
