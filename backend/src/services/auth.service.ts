@@ -106,3 +106,65 @@ export const createAccount = async (data: CreateAccountParams) => {
     refreshToken,
   };
 };
+
+type LoginParams = {
+  email: string;
+  password: string;
+  userAgent?: string;
+};
+export const loginUser = async ({
+  email,
+  password,
+  userAgent,
+}: LoginParams) => {
+  const user = await UserModel.findOne({ email });
+  appAssert(user, UNAUTHORIZED, 'Invalid email or password');
+
+  const isValid = await user.comparePassword(password);
+  appAssert(isValid, UNAUTHORIZED, 'Invalid email or password');
+
+  const userId = user._id;
+  const session = await SessionModel.create({
+    userId,
+    userAgent,
+  });
+
+  const sessionInfo: RefreshTokenPayload = {
+    sessionId: session._id,
+  };
+
+  const refreshToken = signToken(sessionInfo, refreshTokenSignOptions);
+  const accessToken = signToken({
+    ...sessionInfo,
+    userId,
+  });
+  return {
+    user: user.omitPassword(),
+    accessToken,
+    refreshToken,
+  };
+};
+
+export const verifyEmail = async (code: string) => {
+  const validCode = await VerificationCodeModel.findOne({
+    _id: code,
+    type: VerificationCodeType.EmailVerification,
+    expiresAt: { $gt: new Date() },
+  });
+  appAssert(validCode, NOT_FOUND, 'Invalid or expired verification code');
+
+  const updatedUser = await UserModel.findByIdAndUpdate(
+    validCode.userId,
+    {
+      verified: true,
+    },
+    { new: true }
+  );
+  appAssert(updatedUser, INTERNAL_SERVER_ERROR, 'Failed to verify email');
+
+  await validCode.deleteOne();
+
+  return {
+    user: updatedUser.omitPassword(),
+  };
+};

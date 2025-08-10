@@ -1,6 +1,10 @@
 import { z } from 'zod';
 import catchErrors from '../utils/catchErrors';
-import { createAccount } from '../services/auth.service';
+import {
+  createAccount,
+  loginUser,
+  verifyEmail,
+} from '../services/auth.service';
 import { CREATED, OK, UNAUTHORIZED } from '../constants/http';
 import {
   setAuthCookies,
@@ -33,4 +37,25 @@ export const registerHandler = catchErrors(async (req, res) => {
   return setAuthCookies({ res, accessToken, refreshToken })
     .status(CREATED)
     .json(user);
+});
+
+export const loginHandler = catchErrors(async (req, res) => {
+  const request = loginSchema.parse({
+    ...req.body,
+    userAgent: req.headers['user-agent'],
+  });
+  const { accessToken, refreshToken } = await loginUser(request);
+
+  // set cookies
+  return setAuthCookies({ res, accessToken, refreshToken })
+    .status(OK)
+    .json({ message: 'Login successful' });
+});
+
+export const verifyEmailHandler = catchErrors(async (req, res) => {
+  const verificationCode = verificationCodeSchema.parse(req.params.code);
+
+  await verifyEmail(verificationCode);
+
+  return res.status(OK).json({ message: 'Email was successfully verified' });
 });

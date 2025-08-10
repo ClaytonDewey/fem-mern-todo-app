@@ -32,7 +32,10 @@ const App = () => {
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/login' element={<LoginPage />} />
-            <Route path='/verify-email' element={<EmailVerificationPage />} />
+            <Route
+              path='/verify-email/:code'
+              element={<EmailVerificationPage />}
+            />
             <Route path='/forgot-password' element={<ForgotPasswordPage />} />
             <Route path='/reset-password' element={<ResetPasswordPage />} />
             <Route path='/signup' element={<SignUpPage />} />
