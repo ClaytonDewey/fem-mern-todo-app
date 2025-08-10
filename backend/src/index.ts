@@ -1,9 +1,10 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import connectToDatabase from './config/db';
 import { APP_ORIGIN, NODE_ENV, PORT } from './constants/env';
-import cookieParser from 'cookie-parser';
+import authRoutes from './routes/auth.route';
 
 const app = express();
 
@@ -17,8 +18,18 @@ app.use(
 );
 app.use(cookieParser());
 
+// health check
+app.get('/', (_, res) => {
+  return res.status(200).json({
+    status: 'healthy',
+  });
+});
+
+// auth routes
+app.use('/auth', authRoutes);
+
 app.listen(PORT, async () => {
-  console.log(`App running on ${PORT}`);
+  console.log(`Server listening on port ${PORT} in ${NODE_ENV} environment`);
   await connectToDatabase();
 });
 
