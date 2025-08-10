@@ -9,10 +9,10 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import {
   HomePage,
   LoginPage,
-  EmailVerificationPage,
   ForgotPasswordPage,
   ResetPasswordPage,
   SignUpPage,
+  VerifyEmail,
 } from './pages/';
 import './sass/style.scss';
 import { setNavigate } from './lib/navigation';
@@ -37,10 +37,7 @@ const App = () => {
               <Route index element={<HomePage />} />
             </Route>
             <Route path='/login' element={<LoginPage />} />
-            <Route
-              path='/verify-email/:code'
-              element={<EmailVerificationPage />}
-            />
+            <Route path='/verify-email/:code' element={<VerifyEmail />} />
             <Route path='/forgot-password' element={<ForgotPasswordPage />} />
             <Route path='/reset-password' element={<ResetPasswordPage />} />
             <Route path='/signup' element={<SignUpPage />} />
