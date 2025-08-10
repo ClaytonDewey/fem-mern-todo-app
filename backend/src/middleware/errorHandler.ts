@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import { ErrorRequestHandler, Response } from 'express';
-import { BAD_REQUEST, INTERNAL_SERVER_ERROR } from '../../constants/http';
-import AppError from '../../utils/AppError';
-import { clearAuthCookies, REFRESH_PATH } from '../../utils/cookies';
+import { BAD_REQUEST, INTERNAL_SERVER_ERROR } from '../constants/http';
+import AppError from '../utils/AppError';
+import { clearAuthCookies, REFRESH_PATH } from '../utils/cookies';
 
 const handleZodError = (res: Response, error: z.ZodError) => {
   const errors = error.issues.map((err) => ({
