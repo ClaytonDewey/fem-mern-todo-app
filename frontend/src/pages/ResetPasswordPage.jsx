@@ -1,58 +1,25 @@
-import { useState } from 'react';
-import { Button, Input, PasswordStrengthMeter } from '../components';
-import { Lock } from 'lucide-react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { ResetPasswordForm } from '../components';
 
 export const ResetPasswordPage = () => {
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+  const [searchParams] = useSearchParams();
+  const code = searchParams.get('code');
+  const exp = Number(searchParams.get('exp'));
+  const now = Date.now();
+  const linkIsValid = code && exp && exp > now;
 
   return (
     <div className='form__wrapper'>
-      <h2>Reset Password</h2>
-      <form onSubmit={handleSubmit}>
-        <div className='form__group'>
-          <label htmlFor='password' className='sr-only'>
-            Password
-          </label>
-          <div className='form__icon-container'>
-            <Lock className='form__icon' />
-          </div>
-          <Input
-            // ref={inputRef}
-            type='password'
-            id='password'
-            placeholder='Password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+      {linkIsValid ? (
+        <ResetPasswordForm code={code} />
+      ) : (
+        <div className='alert alert-danger'>
+          The link is either invalide or expired.{' '}
+          <Link to='/forgot-password' replace>
+            Request a new password reset link
+          </Link>
         </div>
-
-        <PasswordStrengthMeter password={password} />
-
-        <div className='form__group'>
-          <label htmlFor='confirmPassword' className='sr-only'>
-            Confirm Password
-          </label>
-          <div className='form__icon-container'>
-            <Lock className='form__icon' />
-          </div>
-          <Input
-            // ref={inputRef}
-            type='password'
-            id='confirmPassword'
-            placeholder='Confirm Password'
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        </div>
-        {/* TODO: Show success indicator if password/confirmpassword match */}
-        <Button onSubmit={handleSubmit} type='submit' className='form__btn'>
-          Set New Password
-        </Button>
-      </form>
+      )}
     </div>
   );
 };
