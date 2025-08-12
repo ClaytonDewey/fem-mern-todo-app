@@ -9,6 +9,7 @@ import { authenticate } from './middleware/authenticate';
 import sessionRoutes from './routes/session.route';
 import userRoutes from './routes/user.route';
 import errorHandler from './middleware/errorHandler';
+import taskRoutes from './routes/task.route';
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use('/auth', authRoutes);
 // protected routes
 app.use('/user', authenticate, userRoutes);
 app.use('/sessions', authenticate, sessionRoutes);
+app.use('/tasks', authenticate, taskRoutes);
 
 // error handler
 app.use(errorHandler);
