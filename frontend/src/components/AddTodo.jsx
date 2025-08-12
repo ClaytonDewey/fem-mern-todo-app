@@ -10,13 +10,40 @@ export const AddTodo = () => {
 
   const { mutate: createNewTask, isPending } = useMutation({
     mutationFn: createTask,
+    onMutate: async (newTask) => {
+      // Cancel any outgoing refetches to avoid overwriting optimistic update
+      await queryClient.cancelQueries({ queryKey: ['tasks'] });
+
+      // Snapshot previous tasks
+      const previousTasks = queryClient.getQueryData(['tasks']);
+
+      // Optimistically add the new task
+      queryClient.setQueryData(['tasks'], (old = []) => [
+        ...old,
+        {
+          _id: Math.random().toString(36).substr(2, 9), // temp ID
+          task: newTask.task,
+          completed: false,
+          optimistic: true,
+        },
+      ]);
+
+      setTask(''); // Clear the input right away
+
+      // Return snapshot so we can roll back on error
+      return { previousTasks };
+    },
+    onError: (err, newTask, context) => {
+      // Roll back to previous tasks
+      queryClient.setQueryData(['tasks'], context.previousTasks);
+      toast.error(err.message || 'Something went wrong');
+    },
+    onSettled: () => {
+      // Always refetch after mutation to sync with server
+      queryClient.invalidateQueries({ queryKey: ['tasks'] });
+    },
     onSuccess: () => {
       toast.success('Todo item added successfully!');
-      queryClient.invalidateQueries({ queryKey: ['tasks'] }); // Refresh task list
-      setTask(''); // Clear input after success
-    },
-    onError: (error) => {
-      toast.error(error.message || 'Something went wrong');
     },
   });
 
