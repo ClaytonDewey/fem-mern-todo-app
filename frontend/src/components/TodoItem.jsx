@@ -1,9 +1,12 @@
 import { Button } from '.';
 import { IconCross } from '../icons';
+import useDeleteTask from '../hooks/useDeleteTask';
 
 export const TodoItem = (props) => {
   const { task } = props;
-  console.log(task.task);
+
+  const { deleteTask } = useDeleteTask(task._id);
+
   return (
     <div className='todo'>
       <Button className={`todo__toggle ${task.completed ? 'done' : 'undone'}`}>
@@ -21,7 +24,7 @@ export const TodoItem = (props) => {
           {task.task}
         </p>
       </div>
-      <Button className='btn btn-del'>
+      <Button className='btn btn-del' onClick={deleteTask}>
         <IconCross />
         <span className='sr-only'>Delete Todo</span>
       </Button>

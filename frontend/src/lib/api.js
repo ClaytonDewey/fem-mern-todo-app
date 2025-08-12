@@ -16,3 +16,4 @@ export const deleteSession = async (id) => API.delete(`/sessions/${id}`);
 
 // Tasks
 export const getTasks = async () => API.get('/tasks');
+export const deleteTask = async (id) => API.delete(`/tasks/${id}`);
