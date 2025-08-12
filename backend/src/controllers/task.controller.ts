@@ -1,11 +1,31 @@
 import catchErrors from '../utils/catchErrors';
 import { createTask } from '../services/task.service';
-import { CREATED } from '../constants/http';
+import { BAD_REQUEST, CREATED, NOT_FOUND, OK } from '../constants/http';
+import TaskModel from '../models/task.model';
+import appAssert from '../utils/appAssert';
 
 export const createTaskHandler = catchErrors(async (req, res) => {
-  const userId = req.params.id;
-  const request = { ...req.body, userId };
-  const newTask = await createTask(request);
+  const task = await TaskModel.create({
+    task: req.body.task,
+    userId: req.userId,
+  });
+  res.status(OK).json({ task });
+});
 
-  return res.status(CREATED).json(newTask);
+export const getTasksHandler = catchErrors(async (req, res) => {
+  const tasks = await TaskModel.find({ userId: req.userId });
+  appAssert(tasks, NOT_FOUND, 'Todo items not found');
+
+  res.status(OK).json(tasks);
+});
+
+export const deleteTaskHandler = catchErrors(async (req, res) => {
+  const taskId = req.params.id;
+  const userId = req.userId;
+  const deleted = await TaskModel.findOneAndDelete({
+    _id: taskId,
+    userId,
+  });
+  appAssert(deleted, NOT_FOUND, 'Task not found');
+  return res.status(OK).json({ message: 'Todo item deleted' });
 });
