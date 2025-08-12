@@ -1,24 +1,26 @@
 import { TodoItem, TodoFooter } from '.';
+import useTasks from '../hooks/useTasks';
 
 export const TodoList = () => {
+  const { tasks, isPending, isSuccess, isError } = useTasks();
+
   return (
     <div className='todo__list'>
-      <TodoItem
-        todo={{ text: 'Feed the cat', status: 'completed', id: 1 }}
-        key={1}
-      />
-      <TodoItem
-        todo={{ text: 'Feed the dog', status: 'undone', id: 2 }}
-        key={2}
-      />
-      <TodoItem
-        todo={{ text: 'Do laundry', status: 'undone', id: 3 }}
-        key={3}
-      />
-      <TodoItem
-        todo={{ text: 'Clean the kitchen', status: 'completed', id: 4 }}
-        key={4}
-      />
+      {isPending && <p>Loading...</p>}
+      {isError && <div className='alert alert-danger'>Failed to get tasks</div>}
+      {isSuccess && (
+        <>
+          {tasks.length === 0 ? (
+            <p>No tasks</p>
+          ) : (
+            <>
+              {tasks.map((task, i) => (
+                <TodoItem key={i} task={task} />
+              ))}
+            </>
+          )}
+        </>
+      )}
 
       <TodoFooter />
     </div>

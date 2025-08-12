@@ -2,25 +2,23 @@ import { Button } from '.';
 import { IconCross } from '../icons';
 
 export const TodoItem = (props) => {
-  const { todo } = props;
-
+  const { task } = props;
+  console.log(task.task);
   return (
     <div className='todo'>
-      <Button
-        className={`todo__toggle ${todo.status === 'undone' ? '' : 'done'}`}>
-        {todo.status === 'undone' ? (
-          <span className='sr-only'>mark completed</span>
-        ) : (
+      <Button className={`todo__toggle ${task.completed ? 'done' : 'undone'}`}>
+        {task.completed ? (
           <span className='sr-only'>mark undone</span>
+        ) : (
+          <span className='sr-only'>mark completed</span>
         )}
       </Button>
       <div>
         <p
           style={{
-            textDecoration:
-              todo.status === 'completed' ? 'line-through' : 'none',
+            textDecoration: task.completed ? 'line-through' : 'none',
           }}>
-          {todo.text}
+          {task.task}
         </p>
       </div>
       <Button className='btn btn-del'>
