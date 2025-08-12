@@ -1,9 +1,10 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useQuery } from '@tanstack/react-query';
-import { getTasks } from '../lib/api';
+import { getTasks, deleteTask } from '../lib/api';
 
 export const TASKS = 'tasks';
 
-const useTasks = (opts = {}) => {
+export const useTasks = (opts = {}) => {
   const { data: tasks = [], ...rest } = useQuery({
     queryKey: [TASKS],
     queryFn: getTasks,
@@ -13,4 +14,16 @@ const useTasks = (opts = {}) => {
   return { tasks, ...rest };
 };
 
-export default useTasks;
+export const useDeleteTask = (taskId) => {
+  const queryClient = useQueryClient();
+  const { mutate, ...rest } = useMutation({
+    mutationFn: () => deleteTask(taskId),
+    onSuccess: () => {
+      queryClient.setQueryData([TASKS], (cache) =>
+        cache.filter((task) => task._id !== taskId)
+      );
+    },
+  });
+
+  return { deleteTask: mutate, ...rest };
+};

@@ -1,5 +1,5 @@
 import { TodoItem, TodoFooter } from '.';
-import useTasks from '../hooks/useTasks';
+import { useTasks } from '../hooks/useTasks';
 
 export const TodoList = () => {
   const { tasks, isPending, isSuccess, isError } = useTasks();

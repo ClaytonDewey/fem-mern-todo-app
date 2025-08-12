@@ -1,6 +1,6 @@
 import { Button } from '.';
 import { IconCross } from '../icons';
-import useDeleteTask from '../hooks/useDeleteTask';
+import { useDeleteTask } from '../hooks/useTasks';
 
 export const TodoItem = (props) => {
   const { task } = props;
