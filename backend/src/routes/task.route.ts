@@ -13,7 +13,7 @@ const taskRoutes = Router();
 taskRoutes.post('/create-task', createTaskHandler);
 taskRoutes.get('/', getTasksHandler);
 taskRoutes.patch('/:id', updateTaskHandler);
-taskRoutes.delete('/:id', deleteTaskHandler);
 taskRoutes.delete('/clear-completed', deleteCompletedHandler);
+taskRoutes.delete('/:id', deleteTaskHandler);
 
 export default taskRoutes;
