@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components';
 import { logout } from '../lib/api';
+import { LogOut } from 'lucide-react';
 
 export const Footer = () => {
   const navigate = useNavigate();
@@ -17,7 +18,10 @@ export const Footer = () => {
   return (
     <footer className='footer__main'>
       <p>Drag and drop to reorder list</p>
-      <Button onClick={signOut}>Logout</Button>
+      <Button className='btn form__footer-link' onClick={signOut}>
+        <LogOut className='form__footer-icon' />
+        Logout
+      </Button>
     </footer>
   );
 };
