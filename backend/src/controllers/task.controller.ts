@@ -67,6 +67,7 @@ export const deleteTaskHandler = catchErrors(async (req, res) => {
 });
 
 export const deleteCompletedHandler = catchErrors(async (req, res) => {
-  await TaskModel.deleteMany({ completed: true });
+  const deleted = await TaskModel.deleteMany({ completed: true });
+  appAssert(deleted, BAD_REQUEST, 'Failed to delete tasks');
   res.status(OK).json({ message: 'Completed tasks cleared' });
 });
