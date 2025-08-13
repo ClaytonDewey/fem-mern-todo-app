@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
   createTaskHandler,
+  deleteCompletedHandler,
   deleteTaskHandler,
   getTasksHandler,
   updateTaskHandler,
@@ -13,5 +14,6 @@ taskRoutes.post('/create-task', createTaskHandler);
 taskRoutes.get('/', getTasksHandler);
 taskRoutes.patch('/:id', updateTaskHandler);
 taskRoutes.delete('/:id', deleteTaskHandler);
+taskRoutes.delete('/clear-completed', deleteCompletedHandler);
 
 export default taskRoutes;

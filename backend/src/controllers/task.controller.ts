@@ -65,3 +65,8 @@ export const deleteTaskHandler = catchErrors(async (req, res) => {
   appAssert(deleted, NOT_FOUND, 'Task not found');
   return res.status(OK).json({ message: 'Todo item deleted' });
 });
+
+export const deleteCompletedHandler = catchErrors(async (req, res) => {
+  await TaskModel.deleteMany({ completed: true });
+  res.status(OK).json({ message: 'Completed tasks cleared' });
+});

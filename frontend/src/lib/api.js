@@ -19,3 +19,14 @@ export const createTask = async (data) => API.post('/tasks/create-task', data);
 export const getTasks = async () => API.get('/tasks');
 // export const updateTask = async (id) => API.patch(`/tasks/${id}`);
 export const deleteTask = async (id) => API.delete(`/tasks/${id}`);
+
+//
+export const clearCompletedTasks = async () => {
+  const res = await fetch('/api/tasks/clear-completed', {
+    method: 'DELETE',
+  });
+  if (!res.ok) {
+    throw new Error('Failed to clear completed tasks');
+  }
+  return res.json();
+};
