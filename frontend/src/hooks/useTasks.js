@@ -14,6 +14,19 @@ export const useTasks = (opts = {}) => {
   return { tasks, ...rest };
 };
 
+export const useUpdateTask = () => {
+  const queryClient = useQueryClient();
+
+  const { mutate: updateTaskMutation, ...rest } = useMutation({
+    mutationFn: ({ id, updates }) => updateTaskMutation(id, updates),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tasks'] });
+    },
+  });
+
+  return { updateTaskMutation, ...rest };
+};
+
 export const useDeleteTask = (taskId) => {
   const queryClient = useQueryClient();
   const { mutate, ...rest } = useMutation({
