@@ -193,3 +193,15 @@ input::-webkit-inner-spin-button {
 input[type='number'] {
   -moz-appearance: textfield;
 }
+
+.password-toggle-btn {
+  position: absolute;
+  right: rem(10);
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background-color: transparent;
+  color: hsl(280, 87%, 65%);
+  cursor: pointer;
+  vertical-align: middle;
+}

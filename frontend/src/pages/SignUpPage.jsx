@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button, Input, PasswordStrengthMeter } from '../components';
 import { Link, useNavigate } from 'react-router-dom';
-import { Lock, Mail, User } from 'lucide-react';
+import { Lock, Mail, User, Eye, EyeOff } from 'lucide-react';
 import { register } from '../lib/api';
 import { useMutation } from '@tanstack/react-query';
 
@@ -11,6 +11,10 @@ export const SignUpPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  // Show/hide password toggles
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const {
     mutate: createAccount,
@@ -78,12 +82,18 @@ export const SignUpPage = () => {
             <Lock className='form__icon' />
           </div>
           <Input
-            type='password'
+            type={showPassword ? 'text' : 'password'}
             id='password'
             placeholder='Password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <Button
+            type='button'
+            className='password-toggle-btn'
+            onClick={() => setShowPassword((prev) => !prev)}>
+            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+          </Button>
         </div>
 
         <PasswordStrengthMeter password={password} />
@@ -96,12 +106,18 @@ export const SignUpPage = () => {
             <Lock className='form__icon' />
           </div>
           <Input
-            type='password'
+            type={showPassword ? 'text' : 'password'}
             id='confirmPassword'
             placeholder='Confirm Password'
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
+          <Button
+            type='button'
+            className='password-toggle-btn'
+            onClick={() => setShowConfirmPassword((prev) => !prev)}>
+            {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+          </Button>
         </div>
         {/* TODO: Show success indicator if password/confirmpassword match */}
         <Button
