@@ -12,10 +12,6 @@ export const SignUpPage = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  // Show/hide password toggles
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
   const {
     mutate: createAccount,
     isPending,
@@ -82,18 +78,12 @@ export const SignUpPage = () => {
             <Lock className='form__icon' />
           </div>
           <Input
-            type={showPassword ? 'text' : 'password'}
+            type='password'
             id='password'
             placeholder='Password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button
-            type='button'
-            className='password-toggle-btn'
-            onClick={() => setShowPassword((prev) => !prev)}>
-            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-          </Button>
         </div>
 
         <PasswordStrengthMeter password={password} />
@@ -106,18 +96,12 @@ export const SignUpPage = () => {
             <Lock className='form__icon' />
           </div>
           <Input
-            type={showPassword ? 'text' : 'password'}
+            type='password'
             id='confirmPassword'
             placeholder='Confirm Password'
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-          <Button
-            type='button'
-            className='password-toggle-btn'
-            onClick={() => setShowConfirmPassword((prev) => !prev)}>
-            {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-          </Button>
         </div>
         {/* TODO: Show success indicator if password/confirmpassword match */}
         <Button

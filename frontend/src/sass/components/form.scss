@@ -194,14 +194,28 @@ input[type='number'] {
   -moz-appearance: textfield;
 }
 
-.password-toggle-btn {
-  position: absolute;
-  right: rem(10);
-  top: 50%;
-  transform: translateY(-50%);
-  border: none;
-  background-color: transparent;
-  color: hsl(280, 87%, 65%);
-  cursor: pointer;
-  vertical-align: middle;
+.input {
+  &__wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    input {
+      width: 100%;
+      padding-right: rem(32);
+    }
+  }
+  &__toggle {
+    position: absolute;
+    right: rem(10);
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background-color: transparent;
+    color: hsl(280, 87%, 65%);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
