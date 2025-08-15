@@ -69,3 +69,17 @@ export const deleteCompletedHandler = catchErrors(async (req, res) => {
     deletedCount: result.deletedCount,
   });
 });
+
+export const reorderTasksHandler = catchErrors(async (req, res) => {
+  const userId = req.userId;
+  const { orderedIds } = req.body as { orderedIds: string[] };
+
+  // bulk update order
+  await Promise.all(
+    orderedIds.map((id, index) => {
+      TaskModel.updateOne({ _id: id, userId }, { order: index });
+    })
+  );
+
+  res.status(OK).json({ success: true });
+});

@@ -4,6 +4,7 @@ export interface TaskDocument extends mongoose.Document {
   userId: mongoose.Types.ObjectId;
   task: string;
   completed: boolean;
+  order: number;
 }
 
 const taskSchema = new mongoose.Schema<TaskDocument>(
@@ -15,6 +16,7 @@ const taskSchema = new mongoose.Schema<TaskDocument>(
     },
     task: { type: String, required: true },
     completed: { type: Boolean, default: false },
+    order: { type: Number, default: 0 },
   },
   {
     timestamps: true,
