@@ -1,6 +1,5 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Button } from '.';
-import { clearCompletedTasks } from '../lib/api';
+import { useClearCompletedTasks } from '../hooks/useTasks';
 
 export const TodoFooter = ({
   activeItemCount,
@@ -8,14 +7,7 @@ export const TodoFooter = ({
   filter,
   setFilter,
 }) => {
-  const queryClient = useQueryClient();
-
-  const { mutate: clearCompleted, isPending: isClearing } = useMutation({
-    mutationFn: clearCompletedTasks,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['tasks'] });
-    },
-  });
+  const { mutate: clearCompleted } = useClearCompletedTasks();
 
   return (
     <footer className='todo todo__footer'>
@@ -43,14 +35,13 @@ export const TodoFooter = ({
       </div>
       <Button
         className='btn btn-text'
-        onClick={() => clearCompleted}
+        onClick={() => clearCompleted()}
         title={
           completedItemCount === 0
             ? 'No completed tasks to clear'
             : 'Remove all completed tasks'
-        }
-        disabled={isClearing || completedItemCount === 0}>
-        {isClearing ? 'Clearing...' : 'Clear Completed'}
+        }>
+        Clear Completed
       </Button>
     </footer>
   );

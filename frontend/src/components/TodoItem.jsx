@@ -4,8 +4,8 @@ import { IconCross } from '../icons';
 import { useDeleteTask, useUpdateTask } from '../hooks/useTasks';
 
 export const TodoItem = ({ task }) => {
-  const { deleteTask } = useDeleteTask(task._id);
   const { mutate: updateTaskMutation } = useUpdateTask();
+  const { mutate: deleteTask } = useDeleteTask();
 
   const [isEditing, setIsEditing] = useState(false);
   const [draftText, setDraftText] = useState(task.task);
@@ -68,7 +68,7 @@ export const TodoItem = ({ task }) => {
         )}
       </div>
 
-      <Button className='btn btn-del' onClick={deleteTask}>
+      <Button className='btn btn-del' onClick={() => deleteTask(task._id)}>
         <IconCross />
         <span className='sr-only'>Delete Todo</span>
       </Button>
