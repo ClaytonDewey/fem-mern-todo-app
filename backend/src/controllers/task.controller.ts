@@ -1,12 +1,5 @@
 import catchErrors from '../utils/catchErrors';
-import { createTask } from '../services/task.service';
-import {
-  BAD_REQUEST,
-  CREATED,
-  FORBIDDEN,
-  NOT_FOUND,
-  OK,
-} from '../constants/http';
+import { BAD_REQUEST, FORBIDDEN, NOT_FOUND, OK } from '../constants/http';
 import TaskModel, { TaskDocument } from '../models/task.model';
 import appAssert from '../utils/appAssert';
 
@@ -67,7 +60,12 @@ export const deleteTaskHandler = catchErrors(async (req, res) => {
 });
 
 export const deleteCompletedHandler = catchErrors(async (req, res) => {
-  const deleted = await TaskModel.deleteMany({ completed: true });
-  appAssert(deleted, BAD_REQUEST, 'Failed to delete tasks');
-  res.status(OK).json({ message: 'Completed tasks cleared' });
+  const userId = req.userId;
+
+  const result = await TaskModel.deleteMany({ userId, completed: true });
+
+  res.status(OK).json({
+    success: true,
+    deletedCount: result.deletedCount,
+  });
 });
