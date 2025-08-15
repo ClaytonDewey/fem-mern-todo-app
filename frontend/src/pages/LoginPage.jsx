@@ -42,15 +42,14 @@ export const LoginPage = () => {
           <label htmlFor='email' className='sr-only'>
             Email Address
           </label>
-          <div className='form__icon-container'>
-            <Mail className='form__icon' />
-          </div>
           <Input
             type='email'
+            icon={Mail}
             id='email'
             placeholder='Email Address'
             value={email}
             autoComplete='email'
+            error={!email && 'Email is required'}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
@@ -59,14 +58,13 @@ export const LoginPage = () => {
           <label htmlFor='password' className='sr-only'>
             Password
           </label>
-          <div className='form__icon-container'>
-            <Lock className='form__icon' />
-          </div>
           <Input
             type='password'
+            icon={Lock}
             id='password'
             placeholder='Password'
             value={password}
+            error={!email && 'Password is required'}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
