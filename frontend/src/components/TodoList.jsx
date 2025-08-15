@@ -36,15 +36,9 @@ export const TodoList = () => {
       {isError && <div className='alert alert-danger'>Failed to get tasks</div>}
       {isSuccess && (
         <>
-          {tasks.length === 0 ? (
-            <p>No tasks</p>
-          ) : (
-            <>
-              {filteredTasks.map((task) => (
-                <TodoItem key={task._id} task={task} />
-              ))}
-            </>
-          )}
+          {filteredTasks.map((task) => (
+            <TodoItem key={task._id} task={task} />
+          ))}
         </>
       )}
 
