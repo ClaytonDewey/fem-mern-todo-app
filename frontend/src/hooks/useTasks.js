@@ -5,6 +5,7 @@ import {
   deleteTask,
   updateTask,
   clearCompletedTasks,
+  reorderTasks,
 } from '../lib/api';
 
 export const TASKS = 'tasks';
@@ -17,6 +18,35 @@ export const useTasks = (opts = {}) => {
   });
 
   return { tasks, ...rest };
+};
+
+export const useReorderTasks = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (orderedIds) => reorderTasks(orderedIds),
+    onMutate: async (orderedIds) => {
+      await queryClient.cancelQueries({ queryKey: ['tasks'] });
+
+      const prev = queryClient.getQueryData(['tasks']);
+      queryClient.setQueryData(['tasks'], (old) =>
+        old
+          ? [...old].sort(
+              (a, b) => orderedIds.indexOf(a._id) - orderedIds.indexOf(b._id)
+            )
+          : []
+      );
+      return { prev };
+    },
+    onError: (err, _, ctx) => {
+      if (ctx?.prev) {
+        queryClient.setQueryData(['tasks'], ctx.prev);
+      }
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['tasks'] });
+    },
+  });
 };
 
 export const useUpdateTask = () => {

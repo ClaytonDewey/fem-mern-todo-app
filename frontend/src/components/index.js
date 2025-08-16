@@ -6,6 +6,7 @@ export { Header } from './Header';
 export { Input } from './Input';
 export { PasswordStrengthMeter } from './PasswordStrengthMeter';
 export { ResetPasswordForm } from './ResetPasswordForm';
+export { SortableItem } from './SortableItem';
 export { TodoFooter } from './TodoFooter';
 export { TodoItem } from './TodoItem';
 export { TodoList } from './TodoList';
