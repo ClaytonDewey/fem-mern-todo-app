@@ -4,9 +4,12 @@ import TaskModel, { TaskDocument } from '../models/task.model';
 import appAssert from '../utils/appAssert';
 
 export const createTaskHandler = catchErrors(async (req, res) => {
+  const maxOrder = await TaskModel.findOne().sort('-order').exec();
+
   const task = await TaskModel.create({
     task: req.body.task,
     userId: req.userId,
+    order: maxOrder ? maxOrder.order + 1 : 0,
   });
   res.status(OK).json({ task });
 });
