@@ -18,8 +18,8 @@ export const deleteSession = async (id) => API.delete(`/sessions/${id}`);
 export const createTask = async (data) => API.post('/tasks/create-task', data);
 export const getTasks = async () =>
   API.get('/tasks').then((tasks) => tasks.sort((a, b) => a.order - b.order));
-export const reorderTasks = async (updates) =>
-  API.patch('/tasks/reorder', updates);
+export const reorderTasks = async (orderedIds) =>
+  API.patch('/tasks/reorder', { orderedIds });
 export const updateTask = async (id, updates) =>
   API.patch(`/tasks/${id}`, updates);
 export const clearCompletedTasks = async () =>
