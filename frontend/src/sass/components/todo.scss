@@ -45,8 +45,8 @@
     &.done {
       content: '';
       color: var(--light-1);
-      height: 20px;
-      width: 20px;
+      height: rem(20);
+      width: rem(20);
       transition: transform 120ms ease-in-out;
       background: var(--icon-check) no-repeat 50% center,
         linear-gradient(-225deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%))
@@ -59,15 +59,8 @@
     height: 100%;
   }
 
-  input {
-    font-family: var(--ff-sans);
-    font-size: rem(18);
-    padding: 0 rem(20);
-    width: 100%;
-    height: 100%;
-    border: none;
-    background-color: transparent;
-  }
+  // input {
+  // }
 
   &__footer {
     display: grid;
@@ -119,5 +112,24 @@
     h2 {
       margin-bottom: 3rem;
     }
+  }
+
+  &__edit {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+}
+
+.input__field {
+  font-family: var(--ff-sans);
+  font-size: rem(18);
+  padding: 0 rem(20);
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+  &:focus {
+    box-shadow: 0 0 0 rem(4) rgba(13, 110, 253, 0.4);
   }
 }

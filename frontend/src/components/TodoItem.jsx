@@ -42,10 +42,11 @@ export const TodoItem = ({ task }) => {
         )}
       </Button>
 
-      <div onDoubleClick={() => setIsEditing(true)}>
+      <div className='todo__edit' onClick={() => setIsEditing(true)}>
         {isEditing ? (
           <input
             type='text'
+            className='input__field'
             value={draftText}
             onChange={(e) => setDraftText(e.target.value)}
             onBlur={saveEdit}
@@ -56,7 +57,6 @@ export const TodoItem = ({ task }) => {
                 setIsEditing(false);
               }
             }}
-            autoFocus
           />
         ) : (
           <p
