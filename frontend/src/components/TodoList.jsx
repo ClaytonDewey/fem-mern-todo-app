@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TodoItem, TodoFooter } from '.';
+import { TodoItem, TodoFooter, Loader } from '.';
 import { useTasks } from '../hooks/useTasks';
 
 export const TodoList = () => {
@@ -16,7 +16,21 @@ export const TodoList = () => {
     return true; // display all
   });
 
-  if (!tasks.length) {
+  if (isPending) {
+    return <Loader />;
+  }
+
+  if (isError) {
+    return (
+      <div className='todo__list'>
+        <div className='todo todo__empty'>
+          <div className='alert alert-danger'>Failed to get tasks</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (isSuccess && tasks.length === 0) {
     return (
       <div className='todo__list'>
         <div className='todo todo__empty'>
@@ -32,8 +46,6 @@ export const TodoList = () => {
 
   return (
     <div className='todo__list'>
-      {isPending && <p>Loading...</p>}
-      {isError && <div className='alert alert-danger'>Failed to get tasks</div>}
       {isSuccess && (
         <>
           {filteredTasks.map((task) => (

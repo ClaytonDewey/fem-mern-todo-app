@@ -4,6 +4,7 @@ export { Button } from './Button';
 export { Footer } from './Footer';
 export { Header } from './Header';
 export { Input } from './Input';
+export { Loader } from './Loader';
 export { PasswordStrengthMeter } from './PasswordStrengthMeter';
 export { ResetPasswordForm } from './ResetPasswordForm';
 export { SortableItem } from './SortableItem';
