@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { Button, Input } from '../components';
+import { Button, Input, Loader } from '../components';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Lock, Mail } from 'lucide-react';
 import { login } from '../lib/api';
@@ -15,7 +15,7 @@ export const LoginPage = () => {
   const {
     mutate: signIn,
     // TODO: work on loading spinner
-    // isPending,
+    isPending,
     isError,
   } = useMutation({
     mutationFn: login,
@@ -30,6 +30,10 @@ export const LoginPage = () => {
     e.preventDefault();
     signIn({ email, password });
   };
+
+  if (isPending) {
+    return <Loader />;
+  }
 
   return (
     <div className='form__wrapper'>

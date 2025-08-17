@@ -1,11 +1,12 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
+import { Loader } from '.';
 
 export const AppContainer = () => {
   const { user, isLoading } = useAuth();
 
   return isLoading ? (
-    <p>Loading</p>
+    <Loader />
   ) : user ? (
     <>
       <Outlet />
